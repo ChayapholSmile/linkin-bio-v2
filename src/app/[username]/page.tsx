@@ -17,10 +17,7 @@ import dbConnect from "@/lib/db";
 import Bio from "@/models/Bio";
 import NotFound from "../not-found";
 
-// Define a specific type for the page props to resolve the build error
-type UserBioPageProps = {
-  params: { username: string };
-};
+// Removed the shared UserBioPageProps type to simplify type inference for the build process.
 
 interface LinkItem {
   title?: string;
@@ -49,8 +46,8 @@ async function getBioData(username: string) {
   return bio;
 }
 
-// Generate dynamic metadata for each user page
-export async function generateMetadata({ params }: UserBioPageProps): Promise<Metadata> {
+// Generate dynamic metadata for each user page using an inline type for props.
+export async function generateMetadata({ params }: { params: { username: string } }): Promise<Metadata> {
   const content = await getBioData(params.username);
 
   if (!content) {
@@ -87,7 +84,7 @@ export async function generateMetadata({ params }: UserBioPageProps): Promise<Me
 }
 
 
-export default async function UserBioPage({ params }: UserBioPageProps) {
+export default async function UserBioPage({ params }: { params: { username: string } }) {
   const content = await getBioData(params.username);
 
   if (!content) {
