@@ -16,6 +16,11 @@ import dbConnect from "@/lib/db";
 import Bio from "@/models/Bio";
 import NotFound from "../not-found";
 
+// Define a specific type for the page props to resolve the build error
+type UserBioPageProps = {
+  params: { username: string };
+};
+
 interface LinkItem {
   title?: string;
   description?: string;
@@ -45,7 +50,7 @@ async function getBioData(username: string) {
 }
 
 
-export default async function UserBioPage({ params }: { params: { username: string } }) {
+export default async function UserBioPage({ params }: UserBioPageProps) {
   const content = await getBioData(params.username);
 
   if (!content) {
@@ -129,3 +134,4 @@ export default async function UserBioPage({ params }: { params: { username: stri
     </Column>
   );
 }
+
