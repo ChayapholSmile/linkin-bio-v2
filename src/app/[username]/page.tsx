@@ -4,7 +4,7 @@ import { type Metadata } from 'next';
 import dbConnect from "@/lib/db";
 import Bio from "@/models/Bio";
 import NotFound from "../not-found";
-import BioPageClient from "@/components/BioPage-client"; // Import the new client component
+import BioPageClient from "@/components/BioPageClient"; // Corrected the import path to match the new filename
 
 // The data fetching function remains the same
 async function getBioData(username: string) {
